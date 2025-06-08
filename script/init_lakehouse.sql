@@ -1,14 +1,12 @@
 -- Using the Databricks community version to build the lakehouse
--- USE CATALOG main;
+-- Hence Can't use Schema or Catalog option 
 
--- Drop database if exists (CASCADE will remove all tables inside)
-DROP DATABASE IF EXISTS DataWarehouse CASCADE;
+-- Drop databases (schemas) if they exist
+DROP DATABASE IF EXISTS bronze CASCADE;
+DROP DATABASE IF EXISTS silver CASCADE;
+DROP DATABASE IF EXISTS gold CASCADE;
 
--- Create database
-CREATE DATABASE IF NOT EXISTS DataWarehouse
-COMMENT 'This is the DataWarehouse database with bronze, silver, and gold schemas';
-
--- Create schemas (Databricks schemas = SQL Server schemas inside the database)
-CREATE SCHEMA IF NOT EXISTS DataWarehouse.bronze;
-CREATE SCHEMA IF NOT EXISTS DataWarehouse.silver;
-CREATE SCHEMA IF NOT EXISTS DataWarehouse.gold;
+-- Create databases (schemas)
+CREATE DATABASE IF NOT EXISTS bronze COMMENT 'Bronze Layer - Raw Data';
+CREATE DATABASE IF NOT EXISTS silver COMMENT 'Silver Layer - Cleansed Data';
+CREATE DATABASE IF NOT EXISTS gold COMMENT 'Gold Layer - Curated Business Data';
